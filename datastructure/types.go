@@ -1,5 +1,7 @@
 package datastructure
 
+import "fmt"
+
 type Compare interface {
 	Less(other interface{}) bool
 	Swap(other interface{})
@@ -24,4 +26,15 @@ func (node *listNode) reverse() *listNode {
 	node.next.next = node
 	node.next = nil
 	return newNode
+}
+
+// tree part
+type treeNode struct {
+	Data  interface{}
+	Left  *treeNode
+	Right *treeNode
+}
+
+func (tNode *treeNode) Print() {
+	fmt.Printf("---tree data: %v---\n", tNode.Data)
 }
