@@ -34,4 +34,25 @@ func TestList_Sort(t *testing.T) {
 	list.Sort()
 	fmt.Println("-------- sort ----------")
 	list.Print()
+	fmt.Println("----- reverse -----")
+	list.Reverse(true)
+	list.Print()
+	fmt.Print("------- reverse recursive false-----")
+	list.Reverse(false)
+	list.Print()
+}
+
+func TestList_CycleNode(t *testing.T) {
+	list := New()
+	for in := 0; in < 6; in++ {
+		list.InsertTail(&testType{in})
+	}
+	list.SetCircle(3)
+
+	hasCycle, node := list.HasCircle()
+	fmt.Println("has cycle: ", hasCycle, " meeting node: ", node.data)
+	if hasCycle {
+		cycleNode := list.CircleNode()
+		fmt.Println("cycle node: ", cycleNode.data)
+	}
 }
