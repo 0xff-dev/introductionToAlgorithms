@@ -57,3 +57,60 @@ func (self *List) Print() {
 		walker.data.Print()
 	}
 }
+
+func (self *List) SetCircle(index int) {
+	step, walker, aimNode := 0, self.Head, self.Head
+	for ; walker.next != nil; walker, step = walker.next, step+1 {
+		if step == index {
+			aimNode = walker
+		}
+	}
+	walker.next = aimNode
+}
+
+func (self *List) HasCircle() (bool, *listNode) {
+	if self.Head == nil {
+		return false, nil
+	}
+	hasCycle := false
+	walker, nextWalker := self.Head, self.Head
+	for nextWalker != nil && nextWalker.next != nil {
+		nextWalker = nextWalker.next.next
+		walker = walker.next
+		if nextWalker == walker {
+			hasCycle = true
+			break
+		}
+	}
+	return hasCycle, walker
+}
+
+func (self *List) CircleNode() *listNode {
+	hasCycle, node := self.HasCircle()
+	if hasCycle {
+		walker := self.Head
+		for walker != node {
+			walker, node = walker.next, node.next
+		}
+		return node
+	}
+	return nil
+}
+
+func (self *List) Reverse(recursive bool) {
+	if recursive {
+		self.Head = self.Head.reverse()
+		return
+	}
+	if self.Head == nil || self.Head.next == nil {
+		return
+	}
+	pre, next := self.Head, self.Head.next
+	pre.next = nil
+	for next != nil {
+		tmp := next.next
+		next.next = pre
+		pre, next = next, tmp
+	}
+	self.Head = pre
+}
