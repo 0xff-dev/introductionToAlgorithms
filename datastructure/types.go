@@ -15,3 +15,13 @@ type List struct {
 	Size int // list length
 	Head *listNode
 }
+
+func (node *listNode) reverse() *listNode {
+	if node == nil || node.next == nil {
+		return node
+	}
+	newNode := node.next.reverse()
+	node.next.next = node
+	node.next = nil
+	return newNode
+}
