@@ -30,9 +30,10 @@ func (node *listNode) reverse() *listNode {
 
 // tree part
 type treeNode struct {
-	Data  interface{}
-	Left  *treeNode
-	Right *treeNode
+	Data   interface{}
+	Left   *treeNode
+	Right  *treeNode
+	Parent *treeNode // this is only for find parent function, in others ways, this var will not be used.
 }
 
 func (tNode *treeNode) Print() {
