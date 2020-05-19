@@ -1,6 +1,8 @@
 // 二叉搜索树
 package datastructure
 
+import "fmt"
+
 func (tNode *treeNode) Search(key int) *treeNode {
 	compareKey, _ := tNode.Data.(int)
 	if tNode.Data == nil || compareKey == key {
@@ -138,4 +140,68 @@ func (tNode *treeNode) Successor(val int) *treeNode {
 		return rootIndex
 	}
 	return firstParent
+}
+
+func (tNode *treeNode) BinarySearchTree2DoublyList() {
+	var head *treeNode
+	aux(tNode, &head)
+	for walker := &head; *walker != nil; *walker = (*walker).Left {
+		fmt.Println("now item: ", (*walker).Data)
+	}
+}
+
+func aux(root *treeNode, last **treeNode) {
+	if root == nil {
+		return
+	}
+	cur := root
+	if cur.Left != nil {
+		aux(cur.Left, last)
+	}
+	cur.Left = *last
+	if *last != nil {
+		(*last).Right = cur
+	}
+	*last = cur
+	if cur.Right != nil {
+		aux(cur.Right, last)
+	}
+}
+
+// 先不管平衡的问题
+func (tNode *treeNode) InsertNode(val int) {
+	insert(tNode, val)
+}
+
+func insert(root *treeNode, val int) {
+	walker := root
+	var father *treeNode
+	var cmp int
+	for walker != nil {
+		father = walker
+		cmp, _ = walker.Data.(int)
+		if cmp > val {
+			walker = walker.Left
+		} else {
+			walker = walker.Right
+		}
+	}
+	if father == nil {
+		root = &treeNode{val, nil, nil, nil}
+		return
+	}
+	node := &treeNode{val, nil, nil, nil}
+	if cmp > val {
+		father.Right = node
+	} else {
+		father.Left = node
+	}
+}
+
+// 搜索二叉树节点分几种情况
+// 1. 没有任何节点的时候直接删除就好
+// 2. 只有一个孩子，那么，这个孩子替代他即可
+// 3. 有连个孩子，那么需要找目标节点的后继，
+func (tNode *treeNode) DeleteNode(val int) {
+
 }
