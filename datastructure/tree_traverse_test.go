@@ -110,3 +110,11 @@ func TestTreeNode_Predecessor(t *testing.T) {
 	node = tree.Successor(14)
 	fmt.Println(node.Data)
 }
+
+func TestTreeNode_InsertNode(t *testing.T) {
+	tree := treeNode{Data: 10}
+	tree.InsertNode(6)
+	tree.InsertNode(12)
+	tree.Floor()
+}
+
