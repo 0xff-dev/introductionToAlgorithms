@@ -118,3 +118,41 @@ func TestTreeNode_InsertNode(t *testing.T) {
 	tree.Floor()
 }
 
+func TestTreeNode_DeleteNode(t *testing.T) {
+	tree := &treeNode{
+		Data: 12,
+		Left: &treeNode{
+			Data: 10,
+			Left: &treeNode{
+				Data: 8,
+				Left: nil,
+				Right: &treeNode{
+					Data:  9,
+					Left:  nil,
+					Right: nil,
+				},
+			},
+			Right: &treeNode{
+				Data:  11,
+				Left:  nil,
+				Right: nil,
+			},
+		},
+		Right: &treeNode{
+			Data: 15,
+			Left: &treeNode{
+				Data:  14,
+				Left:  nil,
+				Right: nil,
+			},
+			Right: &treeNode{
+				Data:  16,
+				Left:  nil,
+				Right: nil,
+			},
+		},
+	}
+	DeleteNode(&tree, 12)
+	tree.Floor()
+	fmt.Println(tree)
+}
