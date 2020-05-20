@@ -87,17 +87,20 @@ func (tNode *treeNode) FindParent(val int, predecessor bool) (selfNode, rootInde
 	}
 	return
 }
-func GetNode(tNode *treeNode, left bool) *treeNode {
+func GetNode(tNode *treeNode, left bool) (*treeNode, *treeNode) {
+	var father *treeNode
 	if left {
 		for tNode.Right != nil {
+			father = tNode
 			tNode = tNode.Right
 		}
 	} else {
 		for tNode.Left != nil {
+			father = tNode
 			tNode = tNode.Left
 		}
 	}
-	return tNode
+	return father, tNode
 }
 
 //若一个节点有左子树，那么该节点的前驱节点是其左子树中val值最大的节点（也就是左子树中所谓的rightMostNode）
@@ -110,7 +113,8 @@ func (tNode *treeNode) Predecessor(val int) *treeNode {
 		return nil // can not find a node by val
 	}
 	if selfNode.Left != nil {
-		return GetNode(selfNode.Left, true)
+		_, node := GetNode(selfNode.Left, true)
+		return node
 	}
 	if rootIndex == nil || firstParent == nil {
 		return nil
@@ -131,7 +135,8 @@ func (tNode *treeNode) Successor(val int) *treeNode {
 		return nil // not found node by val
 	}
 	if selfNode.Right != nil {
-		return GetNode(selfNode.Right, false)
+		_, node := GetNode(selfNode.Right, false)
+		return node
 	}
 	if rootIndex == nil || firstParent == nil {
 		return nil
@@ -202,6 +207,52 @@ func insert(root *treeNode, val int) {
 // 1. 没有任何节点的时候直接删除就好
 // 2. 只有一个孩子，那么，这个孩子替代他即可
 // 3. 有连个孩子，那么需要找目标节点的后继，
-func (tNode *treeNode) DeleteNode(val int) {
+// 目前首先有点啰嗦，周末精简
+func DeleteNode(root **treeNode, val int) {
+	selfNode, father, _ := (*root).FindParent(val, false)
+	if selfNode == nil {
+		return
+	}
+	if selfNode.Left == nil {
+		if father == nil {
+			*root = (*root).Right
+			fmt.Println("root", root)
+			return
+		}
+		if selfNode == father.Right {
+			father.Right = selfNode.Right
+		} else {
+			father.Left = selfNode.Right
+		}
+		return
+	}
+	if selfNode.Right == nil {
+		if father == nil {
+			*root = (*root).Left
+			return
+		}
+		if selfNode == father.Right {
+			father.Right = selfNode.Left
+		} else {
+			father.Left = selfNode.Left
+		}
+		return
+	}
 
+	successorFather, successorNode := GetNode(selfNode.Right, false)
+	if successorNode != selfNode.Right {
+		successorFather.Left = successorNode.Right
+		successorNode.Right = selfNode.Right
+	}
+	successorNode.Left = selfNode.Left
+	if father != nil {
+		if father.Left == selfNode {
+			father.Left = successorNode
+		} else {
+			father.Right = successorNode
+		}
+	} else {
+		*root = successorNode
+	}
 }
+
