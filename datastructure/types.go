@@ -34,8 +34,21 @@ type treeNode struct {
 	Left   *treeNode
 	Right  *treeNode
 	Parent *treeNode // this is only for find parent function, in others ways, this var will not be used.
+	Depth int
 }
 
 func (tNode *treeNode) Print() {
 	fmt.Printf("---tree data: %v---\n", tNode.Data)
+}
+
+type AvlTree struct {
+	Root *treeNode
+}
+
+func (node *treeNode) Value() int {
+	if node == nil {
+		panic(fmt.Errorf("nil pointer"))
+	}
+	intVal, _ := node.Data.(int)
+	return intVal
 }

@@ -192,10 +192,10 @@ func insert(root *treeNode, val int) {
 		}
 	}
 	if father == nil {
-		root = &treeNode{val, nil, nil, nil}
+		root = &treeNode{Data: val}
 		return
 	}
-	node := &treeNode{val, nil, nil, nil}
+	node := &treeNode{Data: val}
 	if cmp > val {
 		father.Right = node
 	} else {
