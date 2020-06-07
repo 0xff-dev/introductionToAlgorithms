@@ -34,16 +34,32 @@ type treeNode struct {
 	Left   *treeNode
 	Right  *treeNode
 	Parent *treeNode // this is only for find parent function, in others ways, this var will not be used.
-	Depth int
+	Depth  int
+	Color  bool
 }
 
 func (tNode *treeNode) Print() {
-	fmt.Printf("---tree data: %v---\n", tNode.Data)
+	fmt.Printf("---tree data: %v--- color: %s\n", tNode.Data, tNode.color())
 }
 
+func (tNode *treeNode) color() string{
+	if tNode.Color {
+		return "RED"
+	}
+	return "BLACK"
+}
 type AvlTree struct {
 	Root *treeNode
 }
+
+type RBTree struct {
+	Root *treeNode
+}
+
+const (
+	RED   = true
+	BLACk = false
+)
 
 func (node *treeNode) Value() int {
 	if node == nil {
