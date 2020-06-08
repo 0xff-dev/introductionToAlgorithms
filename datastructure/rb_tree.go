@@ -124,7 +124,79 @@ func (rb *RBTree) Insert(val int) {
 	rb.InsertFixup(node)
 }
 
-// root
-func (rb *RBTree) Delete(val int) {
+func (rb *RBTree) DeleteFixup(node *treeNode) {
+	for (node == nil || node.Color == BLACk) && node != rb.Root {
+		if node == node.Parent.Left {
+			// left children
+			brother := node.Parent.Right
+			if brother.Color == RED {
+				brother.Color = BLACk
+				rb.rbLeftRotate(node.Parent)
+				node.Parent.Color = RED
+				brother = node.Parent.Right
+			}
+			if (brother.Left == nil || brother.Left.Color == BLACk) && (brother.Right == nil || brother.Right.Color == BLACk) {
+				brother.Color = RED
+				node = node.Parent
+			} else {
+				if brother.Right ==nil || brother.Right.Color == BLACk {
+					if brother.Left != nil {
+						brother.Left.Color = BLACk
+					}
+					brother.Color = RED
+					rb.rbRightRotate(brother)
+					brother = node.Parent.Right
+				}
+				brother.Color = node.Parent.Color
+				node.Parent.Color = BLACk
+				brother.Right.Color = BLACk
+				rb.rbLeftRotate(node.Parent)
+				node = rb.Root
+			}
+		} else {
+			// right children
+			brother := node.Parent.Left
+			if brother.Color == RED {
+				brother.Color = BLACk
+				node.Parent.Color = RED
+				rb.rbRightRotate(node.Parent)
+				brother = node.Left
+			}
+			if (brother.Left == nil || brother.Left.Color == BLACk) && (brother.Right == nil || brother.Right.Color == BLACk) {
+				brother.Color = RED
+				node = node.Parent
+			} else {
+				if brother.Left == nil || brother.Left.Color == BLACk {
+					if brother.Right != nil {
+						brother.Right.Color =BLACk
+					}
+					brother.Color = RED
+					rb.rbLeftRotate(brother)
+					brother = node.Parent
+				}
+				brother.Color = node.Parent.Color
+				brother.Left.Color = BLACk
+				node.Parent.Color = BLACk
+				rb.rbRightRotate(node.Parent)
+				node = rb.Root
+			}
+		}
+	}
+	if node != nil {
+		node.Color = BLACk
+	}
+}
 
+// root
+func (rb *RBTree) Delete(node *treeNode) {
+	if node == nil {
+		return
+	}
+	if node.Left == nil || node.Right == nil {
+
+ 	}
+ 	// find successor, mark node color
+ 	// 拼接好father和successor，y的关系
+
+ 	// successor.coloe == black
 }
