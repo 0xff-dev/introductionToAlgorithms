@@ -4,14 +4,16 @@ package datastructure
 import "fmt"
 
 func (tNode *treeNode) Search(key int) *treeNode {
-	compareKey, _ := tNode.Data.(int)
-	if tNode.Data == nil || compareKey == key {
-		return tNode
+	if tNode == nil {
+		return nil
 	}
-	if compareKey < key {
+	if tNode.Value() == key {
+		return tNode
+	} else if tNode.Value() < key {
+		return tNode.Right.Search(key)
+	} else {
 		return tNode.Left.Search(key)
 	}
-	return tNode.Right.Search(key)
 }
 
 // 最小公共祖先
