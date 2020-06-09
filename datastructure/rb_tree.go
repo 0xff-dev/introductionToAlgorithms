@@ -192,11 +192,44 @@ func (rb *RBTree) Delete(node *treeNode) {
 	if node == nil {
 		return
 	}
-	if node.Left == nil || node.Right == nil {
+	color := node.Color
+	var fixupNode, successor *treeNode
+	if node.Left == nil {
+		fixupNode = node.Left
+		rb.RB_TRANSPLANT(node, node.Left)
+	} else if node.Right == nil {
+		fixupNode = node.Right
+		rb.RB_TRANSPLANT(node, node.Right)
+	} else {
+		// find node successor
+		_, successor = GetNode(node, true)
+		color = successor.Color
+		fixupNode = successor.Right
+		if successor.Parent != node {
+			// 更换
+			rb.RB_TRANSPLANT(successor, successor.Right)
+			successor.Right = node.Right
+			successor.Right.Parent = successor
+		}
+		rb.RB_TRANSPLANT(node, successor)
+		successor.Left = node.Left
+		successor.Left.Parent = successor
+		successor.Color = node.Color
+	}
+	if color == BLACk {
+		rb.DeleteFixup(fixupNode)
+	}
+}
 
- 	}
- 	// find successor, mark node color
- 	// 拼接好father和successor，y的关系
-
- 	// successor.coloe == black
+func (rb *RBTree) RB_TRANSPLANT(pre, now *treeNode) {
+	if pre.Parent == nil {
+		rb.Root = now
+	} else if pre == pre.Parent.Left {
+		pre.Parent.Left = now
+	} else {
+		pre.Parent.Right = now
+	}
+	if now != nil {
+		now.Parent = pre.Parent
+	}
 }
