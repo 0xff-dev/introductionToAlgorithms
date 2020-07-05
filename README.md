@@ -21,6 +21,8 @@
 3. 网络
 - http基本握手讲解
 - https讲解
+- http2
+- websocket
 - tcp/udp
 - post/get区别， 状态码介绍，区别
 
@@ -34,6 +36,6 @@
 5. 系统层面
 - epoll/select
 
-6. ngxin/redis篇章
+6. ngxin/redis篇章 (nginx配置反向代理，负载均衡完成)
 
 7. mysql/mongo 篇章
