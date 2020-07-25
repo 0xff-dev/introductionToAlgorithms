@@ -2,7 +2,7 @@ package offer
 
 func IsPopOrder(order, in []int) bool {
 	s1 := &Stack{}
-	for index := len(order)-1; index >= 0; index--{
+	for index := len(order) - 1; index >= 0; index-- {
 		s1.Push(order[index])
 	}
 	s2 := &Stack{}

@@ -17,11 +17,11 @@ const INF = 0xffff
 
 func tortoiseCanWin() {
 	var (
-		L int // 总的路径长度
-		N int // 充电站个数
-		C int // 充满电后，乌龟的车子可以形式的距离
-		T int // 充电需要消耗的时间
-		VR int // 兔子的速度
+		L   int // 总的路径长度
+		N   int // 充电站个数
+		C   int // 充满电后，乌龟的车子可以形式的距离
+		T   int // 充电需要消耗的时间
+		VR  int // 兔子的速度
 		VT1 int // 乌龟的车速
 		VT2 int // 乌龟的蹬车速度
 	)
@@ -44,7 +44,7 @@ func tortoiseCanWin() {
 	}
 	dp := make([]float64, N+2)
 	dp[0] = 0
-	for pos := 1; pos < N+2; pos ++ {
+	for pos := 1; pos < N+2; pos++ {
 		dp[pos] = INF
 		for j := 0; j < pos; j++ {
 			length := station[pos] - station[j]
@@ -52,17 +52,17 @@ func tortoiseCanWin() {
 			if length > C {
 				cost = float64(C*1.0/VT1) + float64(length*1.0/VT2)
 			} else {
-				cost = float64(length*1.0/VT1)
+				cost = float64(length * 1.0 / VT1)
 			}
 			if j != 0 {
 				cost += float64(T)
 			}
 			if cost < dp[pos] {
-				dp[pos] =cost
+				dp[pos] = cost
 			}
 		}
 	}
-	if dp[N+1] > float64(L*1.0/VR){
+	if dp[N+1] > float64(L*1.0/VR) {
 		fmt.Println("Good job,rabbit!")
 	} else {
 		fmt.Println("What a pity rabbit!")

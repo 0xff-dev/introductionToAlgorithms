@@ -257,4 +257,3 @@ func DeleteNode(root **treeNode, val int) {
 		*root = successorNode
 	}
 }
-

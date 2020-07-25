@@ -11,7 +11,7 @@ func TestMinStack(t *testing.T) {
 		MinNumStack: &Stack{},
 	}
 
-	for _, num := range []int{2,3,3,5, 1,6} {
+	for _, num := range []int{2, 3, 3, 5, 1, 6} {
 		stack.Push(num)
 	}
 	if min, err := stack.Min(); err == nil && min != 1 {

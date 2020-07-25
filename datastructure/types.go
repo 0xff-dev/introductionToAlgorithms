@@ -42,12 +42,13 @@ func (tNode *treeNode) Print() {
 	fmt.Printf("---tree data: %v--- color: %s\n", tNode.Data, tNode.color())
 }
 
-func (tNode *treeNode) color() string{
+func (tNode *treeNode) color() string {
 	if tNode.Color {
 		return "RED"
 	}
 	return "BLACK"
 }
+
 type AvlTree struct {
 	Root *treeNode
 }

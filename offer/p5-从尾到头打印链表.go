@@ -3,7 +3,7 @@ package offer
 import "fmt"
 
 type Node struct {
-	Val int
+	Val  int
 	Next *Node
 }
 

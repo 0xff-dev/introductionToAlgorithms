@@ -13,7 +13,7 @@ func (set Set) Discard(val string) {
 }
 
 // return a, b set intersection
-func (set Set) Intersection(other Set)  Set {
+func (set Set) Intersection(other Set) Set {
 	s := Set{}
 	for k := range set {
 		if _, ok := other[k]; ok {

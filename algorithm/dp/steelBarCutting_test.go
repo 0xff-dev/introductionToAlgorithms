@@ -6,7 +6,7 @@ import (
 )
 
 func TestMaxPrice(t *testing.T) {
-	for index := 0; index <= 10; index ++ {
+	for index := 0; index <= 10; index++ {
 		fmt.Println("res: ", index, " = ", MaxPrice(index))
 	}
 }

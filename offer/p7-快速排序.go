@@ -8,7 +8,7 @@ func QuickSort(data []int) {
 	compareData := data[0]
 	for walker < len(data) {
 		if data[walker] < compareData {
-			pre ++
+			pre++
 			data[pre], data[walker] = data[walker], data[pre]
 		}
 		walker++
@@ -26,7 +26,7 @@ func Partition(data []int) int {
 	compareData := data[0]
 	for walker < len(data) {
 		if data[walker] < compareData {
-			pre ++
+			pre++
 			data[pre], data[walker] = data[walker], data[pre]
 		}
 		walker++
@@ -42,4 +42,3 @@ func QuickSort1(data []int) {
 		QuickSort1(data[pos+1:])
 	}
 }
-

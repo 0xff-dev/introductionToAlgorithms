@@ -15,7 +15,7 @@ func PrintOne2N(n int) {
 
 func addOne(num []uint8) {
 	cf := uint8(1)
-	for index := len(num)-1; index >= 0; index-- {
+	for index := len(num) - 1; index >= 0; index-- {
 		num[index] += cf
 		cf = 0
 		if num[index] >= 10 {
@@ -35,7 +35,7 @@ func isAllNine(num []uint8) bool {
 
 func printNum(num []uint8) {
 	first := true
-	for index := 0; index < len(num); index ++ {
+	for index := 0; index < len(num); index++ {
 		if num[index] == 0 && first {
 			continue
 		}
@@ -45,7 +45,6 @@ func printNum(num []uint8) {
 	fmt.Println()
 }
 
-
 // 全排列解法
 func FullArray(start int, num []uint8) {
 	if start == len(num) {
@@ -53,7 +52,7 @@ func FullArray(start int, num []uint8) {
 		return
 	}
 	var n uint8 = 0
-	for  ; n < 10; n ++ {
+	for ; n < 10; n++ {
 		num[start] = n
 		FullArray(start+1, num)
 	}

@@ -12,7 +12,6 @@ func PostOrderRecursive(tree *TreeNode) {
 	fmt.Println("data: ", tree.Val)
 }
 
-
 type treeStack struct {
 	Data []*TreeNode
 }

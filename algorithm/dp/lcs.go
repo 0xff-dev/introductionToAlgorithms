@@ -1,6 +1,7 @@
 package dp
 
 import "fmt"
+
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -36,13 +37,13 @@ func printDp(dp map[string]int, x, y int) {
 	}
 }
 
-func multiPath(dp map[string]int, s1, s2 string ,x,  y int, now string)  {
+func multiPath(dp map[string]int, s1, s2 string, x, y int, now string) {
 	if x == -1 || y == -1 {
 		fmt.Println("solution: ", now)
 		return
 	}
 	key, key1, key2, key3 := fmt.Sprintf(keyFormat, x, y), fmt.Sprintf(keyFormat, x-1, y-1), fmt.Sprintf(keyFormat, x-1, y), fmt.Sprintf(keyFormat, x, y-1)
-	if dp[key] == dp[key1]+1 && s1[x] == s2[y]{
+	if dp[key] == dp[key1]+1 && s1[x] == s2[y] {
 		multiPath(dp, s1, s2, x-1, y-1, string(s1[x])+now)
 		return
 	}
@@ -60,19 +61,19 @@ func ScrollArrayLCS(s1, s2 string) int {
 		return 0
 	}
 	dp := [2][]int{}
-	for index := 0; index < 2; index ++ {
+	for index := 0; index < 2; index++ {
 		dp[index] = make([]int, len2+1)
 	}
 	scrollWheel := 0
 	for index := 1; index <= len1; index++ {
-		for inner := 1; inner <= len2; inner ++ {
+		for inner := 1; inner <= len2; inner++ {
 			if s1[index-1] == s2[inner-1] {
 				dp[scrollWheel][inner] = dp[(scrollWheel+1)%2][inner-1] + 1
 			} else {
 				dp[scrollWheel][inner] = max(dp[(scrollWheel+1)%2][inner], dp[scrollWheel][inner-1])
 			}
 		}
-		scrollWheel = (scrollWheel+1)%2
+		scrollWheel = (scrollWheel + 1) % 2
 	}
 	return dp[(len1+1)%2][len2]
 }

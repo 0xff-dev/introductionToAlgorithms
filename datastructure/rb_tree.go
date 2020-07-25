@@ -95,8 +95,8 @@ func (rb *RBTree) InsertFixup(node *treeNode) {
 
 func (rb *RBTree) Insert(val int) {
 	node := &treeNode{
-		Data:   val,
-		Color:  RED,
+		Data:  val,
+		Color: RED,
 	}
 	cur := rb.Root
 	var father *treeNode
@@ -104,7 +104,7 @@ func (rb *RBTree) Insert(val int) {
 		father = cur
 		if val < cur.Value() {
 			cur = cur.Left
-		} else  if val > cur.Value() {
+		} else if val > cur.Value() {
 			cur = cur.Right
 		} else {
 			log.Info("duplicate val")
@@ -139,7 +139,7 @@ func (rb *RBTree) DeleteFixup(node *treeNode) {
 				brother.Color = RED
 				node = node.Parent
 			} else {
-				if brother.Right ==nil || brother.Right.Color == BLACk {
+				if brother.Right == nil || brother.Right.Color == BLACk {
 					if brother.Left != nil {
 						brother.Left.Color = BLACk
 					}
@@ -168,7 +168,7 @@ func (rb *RBTree) DeleteFixup(node *treeNode) {
 			} else {
 				if brother.Left == nil || brother.Left.Color == BLACk {
 					if brother.Right != nil {
-						brother.Right.Color =BLACk
+						brother.Right.Color = BLACk
 					}
 					brother.Color = RED
 					rb.rbLeftRotate(brother)

@@ -2,15 +2,15 @@ package string
 
 import "fmt"
 
-func NativeMatch(s, t string) []int{
+func NativeMatch(s, t string) []int {
 	indexs := make([]int, 0)
 	sl, tl := len(s), len(t)
 	if sl > tl {
 		return indexs
 	}
-	for start := 0; start < tl - sl + 1; start ++ {
+	for start := 0; start < tl-sl+1; start++ {
 		i := 0
-		for ; i < sl ; i ++ {
+		for ; i < sl; i++ {
 			if t[start] != s[i] {
 				break
 			}
@@ -31,9 +31,9 @@ func NativeMatch(s, t string) []int{
 // return int(s) and base^m-1, 方便后续计算
 func beforeRabinKarp(s, t string, base, mod int) (s0, t0, p int) {
 	s0, t0, p = 0, 0, 1
-	for index := 0; index < len(s); index ++ {
-		s0 = (base*s0 + int(byte(s[index])-'0'))%mod
-		t0 = (base*t0 + int(byte(t[index]-'p')))%mod
+	for index := 0; index < len(s); index++ {
+		s0 = (base*s0 + int(byte(s[index])-'0')) % mod
+		t0 = (base*t0 + int(byte(t[index]-'p'))) % mod
 		if index != 0 {
 			p *= base
 		}
@@ -43,12 +43,12 @@ func beforeRabinKarp(s, t string, base, mod int) (s0, t0, p int) {
 
 func RabinKarp(s, t string) {
 	s0, t0, power := beforeRabinKarp(s, t, 10, 13)
-	for index := 0; index < len(t)-len(s); index ++ {
+	for index := 0; index < len(t)-len(s); index++ {
 		fmt.Println("t0 := ", t0)
 		if t0 == s0 {
 			// compare
 			_inner := 0
-			for ; _inner < len(s); _inner ++ {
+			for ; _inner < len(s); _inner++ {
 				if t[index+_inner] != s[_inner] {
 					break
 				}

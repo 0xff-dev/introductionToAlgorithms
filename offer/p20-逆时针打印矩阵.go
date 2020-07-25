@@ -4,12 +4,12 @@ import "fmt"
 
 func getLaps(a, b int) int {
 	tmpA := a / 2
-	if a % 2 != 0 {
-		tmpA ++
+	if a%2 != 0 {
+		tmpA++
 	}
 	tmpB := b / 2
-	if b %2 != 0 {
-		tmpB ++
+	if b%2 != 0 {
+		tmpB++
 	}
 	if tmpA > tmpB {
 		return tmpB

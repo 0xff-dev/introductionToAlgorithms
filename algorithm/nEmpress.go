@@ -14,7 +14,7 @@ func aux(row, n int, cnt *int, arr []int) {
 	if row == n {
 		fmt.Println(arr)
 		for _, item := range arr {
-			for index := 0; index< n; index ++ {
+			for index := 0; index < n; index++ {
 				if index == item {
 					fmt.Print("Q")
 					continue
@@ -24,15 +24,15 @@ func aux(row, n int, cnt *int, arr []int) {
 			fmt.Println()
 		}
 
-		*cnt ++
+		*cnt++
 		return
 	}
-	for index := 0; index < n; index ++ {
+	for index := 0; index < n; index++ {
 		arr[row] = index // 第row，可以放置的位置
 		ok := true
-		for _row := 0; _row < row; _row ++ {
+		for _row := 0; _row < row; _row++ {
 			// 同行，同斜行判断
-			if arr[_row] == arr[row] || arr[row] + _row == arr[_row] + row || arr[_row]- row == arr[row] - _row {
+			if arr[_row] == arr[row] || arr[row]+_row == arr[_row]+row || arr[_row]-row == arr[row]-_row {
 				ok = false
 				break
 			}

@@ -50,4 +50,3 @@ func (ms *MinStack) Pop() (int, error) {
 func (ms *MinStack) Min() (int, error) {
 	return ms.MinNumStack.Top()
 }
-
