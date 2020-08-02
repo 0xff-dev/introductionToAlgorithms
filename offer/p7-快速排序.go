@@ -19,7 +19,10 @@ func QuickSort(data []int) {
 }
 
 func Partition(data []int) int {
-	if len(data) == 0 || len(data) == 1 {
+	if len(data) == 1 {
+		return 0
+	}
+	if len(data) == 0  {
 		return -1
 	}
 	walker, pre := 0, 0
@@ -37,7 +40,7 @@ func Partition(data []int) int {
 
 func QuickSort1(data []int) {
 	pos := Partition(data)
-	if pos != -1 {
+	if pos != -1 && pos != 0 {
 		QuickSort1(data[:pos+1])
 		QuickSort1(data[pos+1:])
 	}
