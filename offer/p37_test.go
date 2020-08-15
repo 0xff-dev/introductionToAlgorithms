@@ -4,14 +4,14 @@ import "testing"
 
 func TestCommonNode(t *testing.T) {
 	commList := &ListNode{
-		Val:  3,
+		Val: 3,
 		Next: &ListNode{
 			Val:  4,
 			Next: nil,
 		},
 	}
 	list1 := &ListNode{
-		Val:  8,
+		Val: 8,
 		Next: &ListNode{
 			Val:  10,
 			Next: commList,

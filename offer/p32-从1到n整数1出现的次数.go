@@ -16,11 +16,11 @@ func ExistOneInN(n string) int {
 		highNum = powerBase(10, len(n)-1)
 	} else {
 		num, _ := strconv.Atoi(n[1:])
-		highNum = num+1
+		highNum = num + 1
 	}
-	lower := int(firstNum) * (length-1) * powerBase(10, length-2)
+	lower := int(firstNum) * (length - 1) * powerBase(10, length-2)
 	next := ExistOneInN(n[1:])
-	return highNum+lower+next
+	return highNum + lower + next
 }
 
 func powerBase(base, exp int) int {
@@ -30,4 +30,3 @@ func powerBase(base, exp int) int {
 	}
 	return result
 }
-

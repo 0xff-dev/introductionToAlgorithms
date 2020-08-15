@@ -1,6 +1,5 @@
 package offer
 
-
 func FindNumAppearOnce(nums []int) int {
 	if len(nums) == 0 {
 		return -1
@@ -16,13 +15,13 @@ func FindNumAppearOnce(nums []int) int {
 
 func IsBitOne(num, index int) bool {
 	num = num >> index
-	return num & 1 == 1
+	return num&1 == 1
 }
 
 func FindFirstBit1(num int) int {
 	// return index
 	index := 0
-	for num & 1 == 0 {
+	for num&1 == 0 {
 		index++
 		num >>= 1
 	}
@@ -41,4 +40,3 @@ func TwoDiffNum(nums []int) (int, int) {
 	}
 	return num1, num2
 }
-

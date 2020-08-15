@@ -5,13 +5,13 @@ import "log"
 func binarySearch(nums []int, k int) int {
 	start, end := 0, len(nums)-1
 	for start < end {
-		mid := (end-start)/2+start
+		mid := (end-start)/2 + start
 		if nums[mid] == k {
 			return mid
 		} else if nums[mid] < k {
-			start = mid+1
+			start = mid + 1
 		} else {
-			end = mid-1
+			end = mid - 1
 		}
 	}
 	return -1
@@ -26,7 +26,7 @@ func existsKinArray(nums []int, k int) int {
 	}
 	cnt := 0
 	left, right := index, index+1
-	for ; left >= 0 && nums[left] == k; left--{
+	for ; left >= 0 && nums[left] == k; left-- {
 		cnt++
 	}
 	for ; right < len(nums) && nums[right] == k; right++ {

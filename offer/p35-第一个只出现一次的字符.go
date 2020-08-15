@@ -15,4 +15,3 @@ func FirstNotRepeatingChar(chars string) byte {
 	}
 	return ' '
 }
-

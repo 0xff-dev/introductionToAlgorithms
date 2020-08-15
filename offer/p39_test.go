@@ -4,10 +4,10 @@ import "testing"
 
 func TestBinaryTreeDepth(t *testing.T) {
 	tree := &TreeNode{
-		Val:   10,
-		Left:  &TreeNode{
-			Val:   6,
-			Left:  &TreeNode{
+		Val: 10,
+		Left: &TreeNode{
+			Val: 6,
+			Left: &TreeNode{
 				Val:   1,
 				Left:  nil,
 				Right: nil,
@@ -31,12 +31,12 @@ func TestBinaryTreeDepth(t *testing.T) {
 
 func TestAdvanceIsBalanceBinaryTree(t *testing.T) {
 	tree := &TreeNode{
-		Val:   10,
-		Left:  &TreeNode{
-			Val:   6,
-			Left:  &TreeNode{
-				Val:   1,
-				Left:  &TreeNode{
+		Val: 10,
+		Left: &TreeNode{
+			Val: 6,
+			Left: &TreeNode{
+				Val: 1,
+				Left: &TreeNode{
 					Val: 4,
 				},
 				Right: nil,

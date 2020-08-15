@@ -17,10 +17,10 @@ func merge(start, end int, nums []int) int {
 			i++
 		} else {
 			result[index] = nums[j]
-			for k := i; k<=mid; k++ {
+			for k := i; k <= mid; k++ {
 				fmt.Printf("parir{%d:%d}\n", nums[k], nums[j])
 			}
-			inversePair += mid-i+1
+			inversePair += mid - i + 1
 			j++
 		}
 		index++
@@ -41,8 +41,8 @@ func merge(start, end int, nums []int) int {
 
 func mergeSort(nums []int, start, end int) int {
 	if start < end {
-		mid := (end-start)/2+start
-		return mergeSort(nums,start, mid) + mergeSort(nums, mid+1, end) + merge(start, end, nums)
+		mid := (end-start)/2 + start
+		return mergeSort(nums, start, mid) + mergeSort(nums, mid+1, end) + merge(start, end, nums)
 	}
 	return 0
 }

@@ -22,7 +22,7 @@ func Partition(data []int) int {
 	if len(data) == 1 {
 		return 0
 	}
-	if len(data) == 0  {
+	if len(data) == 0 {
 		return -1
 	}
 	walker, pre := 0, 0

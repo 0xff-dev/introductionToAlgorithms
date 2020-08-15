@@ -48,12 +48,11 @@ func AdvanceIsBalanceBinaryTree(tree *TreeNode, depth *int) bool {
 	left, right := 0, 0
 	if AdvanceIsBalanceBinaryTree(tree.Left, &left) && AdvanceIsBalanceBinaryTree(tree.Right, &right) {
 		diff := left - right
-		if diff >= -1 && diff <=1 {
+		if diff >= -1 && diff <= 1 {
 			fmt.Println("diff: ", diff)
-			*depth = max(left, right)+1
+			*depth = max(left, right) + 1
 			return true
 		}
 	}
 	return false
 }
-
