@@ -1,12 +1,19 @@
 package sort
 
 import (
-	"fmt"
+	"sort"
 	"testing"
 )
 
 func TestBubbleSort(t *testing.T) {
-	input := []int{10, 1, 89, 234, 7423, 87421, 567, 1354678, 8423}
-	BubbleSort(input)
-	fmt.Println(input)
+	for _, testCase := range [][]int{
+		{6, 3, 7, 9, 1, 0, 23},
+		{1, 2, 3, 4, 5},
+		{1000, 1324, 878, 111, 2, 8734, 113247389},
+	} {
+		BubbleSort(testCase)
+		if !sort.IntsAreSorted(testCase) {
+			t.Fatalf("%v are not sorted", testCase)
+		}
+	}
 }
