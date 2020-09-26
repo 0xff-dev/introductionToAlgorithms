@@ -65,6 +65,25 @@ func findPath(dp [][]int, s1, s2 string, x, y int, ans string) {
 }
 
 // 明天实现
-func LCSbyScrollingArray(s1, s2 string) string {
-	return ""
+func LCSbyScrollingArray(s1, s2 string) int {
+	lenS1, lenS2 := len(s1), len(s2)
+	if lenS1 == 0 || lenS2 == 0 {
+		return 0
+	}
+	dp := make([][]int, 2)
+	for i := 0; i < 2; i++ {
+		dp[i] = make([]int, lenS2+1)
+	}
+	flag := 0
+	for index1 := 1; index1 <= lenS1; index1++ {
+		for index2 := 1; index2 <= lenS2; index2++ {
+			if s1[index1-1] == s2[index2-1] {
+				dp[flag][index2] = dp[1-flag][index2-1] + 1
+				continue
+			}
+			dp[flag][index2] = max(dp[1-flag][index2], dp[flag][index2-1])
+		}
+		flag = 1 - flag
+	}
+	return dp[1-flag][lenS2]
 }
