@@ -58,3 +58,27 @@ func GeneratingFunction(values, nums []int, k int) int {
 	fmt.Println()
 	return coefficient[k]
 }
+
+/*
+   有一个长度为n的数列，求出这个序列中最长的上升子序列长度
+*/
+
+// 4， 2， 3， 1， 5
+func LongestIncreasingSubsequence(nums []int) int {
+	length := len(nums)
+	if length == 0 {
+		return 0
+	}
+	dp := make([]int, len(nums))
+	result := -1
+	for index := 0; index < length; index++ {
+		dp[index] = 1
+		for i := 0; i < index; i++ {
+			if nums[index] >= nums[i] {
+				dp[index] = max(dp[index], dp[i]+1)
+			}
+		}
+		result = max(result, dp[index])
+	}
+	return result
+}

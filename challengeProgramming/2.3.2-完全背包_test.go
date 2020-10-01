@@ -19,3 +19,19 @@ func TestGeneratingFunction(t *testing.T) {
 		GeneratingFunction(values, nums, aim)
 	}
 }
+
+type sequence struct {
+	Nums []int
+	Ans  int
+}
+
+func TestLongestIncreasingSubsequence(t *testing.T) {
+	for _, testCase := range []sequence{
+		{[]int{1, 2, 3, 4, 5}, 5},
+		{[]int{4, 2, 3, 1, 5}, 3},
+	} {
+		if res := LongestIncreasingSubsequence(testCase.Nums); res != testCase.Ans {
+			t.Fatalf("expect %d get %d", testCase.Ans, res)
+		}
+	}
+}
