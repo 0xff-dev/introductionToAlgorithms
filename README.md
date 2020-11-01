@@ -17,9 +17,10 @@
 - [x] 动态规划(需要多尝试一些场景，遇见更多的转移方程)
 - [x] 贪心算法
 - [ ] 并查集
+- [ ] lru，lfu
 
 3. 网络
-- http基本握手讲解
+- http基本握手讲解(完成)
 - https讲解
 - http2
 - websocket
@@ -37,7 +38,7 @@
 5. 系统层面
 - epoll/select
 
-6. ngxin/redis篇章 (nginx配置反向代理，负载均衡完成)
+6. ngxin/redis篇章 (nginx配置反向代理，负载均衡完成, [redis](https://github.com/stevenshuang/redis))
 
 7. mysql/mongo
 - sql强化进行中。准备先战略定放弃monog，优化mysql
