@@ -27,22 +27,33 @@ func (ln *lfuNode) Swap(other *lfuNode) {
 }
 
 type lfuList struct {
-	header *lfuNode
+	header, tail *lfuNode
+	size         int // page size
+	length       int // length of list
 }
 
 func NewLFUList() *lfuList {
-	return &lfuList{header: nil}
+	return &lfuList{header: nil, size: 5, length: 0}
 }
 
 func (l *lfuList) Add(node *lfuNode) {
 	if l.header == nil {
 		l.header = node
+		l.tail = l.header
 		return
 	}
-	// add to header
-	node.Next = l.header
-	l.header = node
 
+	if l.length == l.size {
+		// todo delete tail node
+		l.Delete(l.tail)
+	}
+	walker := l.header
+	for ; walker.Next != nil; walker = walker.Next {
+	}
+	walker.Next = node
+	l.tail = node
+	// add to header
+	l.length++
 	l.Sort()
 }
 
@@ -60,6 +71,16 @@ func (l *lfuList) Delete(node *lfuNode) {
 		}
 		walker = &(entry.Next)
 	}
+}
+
+func (l *lfuList) Find(key int) *lfuNode {
+	walker := l.header
+	for ; walker != nil; walker = walker.Next {
+		if walker.Val == key {
+			return walker
+		}
+	}
+	return nil
 }
 
 func (l *lfuList) Dis() {
@@ -92,3 +113,32 @@ func sort(start, end *lfuNode) {
 }
 
 // todo add lfuCache struct and impl get, set
+
+func (lfu *lfuList) Get(key int) *lfuNode {
+	node := lfu.Find(key)
+	if node == nil {
+		return nil
+	}
+
+	// add fre
+	node.Fre++
+	lfu.Sort()
+	return node
+}
+
+func (lfu *lfuList) Set(key, newKey int) {
+	node := lfu.Find(key)
+	if node == nil {
+		n := &lfuNode{
+			Fre:     1,
+			Val:     newKey,
+			AddTime: time.Now(),
+			Next:    nil,
+		}
+		lfu.Add(n)
+		return
+	}
+	node.Fre++
+	node.Val = newKey
+	lfu.Sort()
+}
