@@ -1,8 +1,6 @@
 package datastructure
 
-import (
-	"go-common/library/log"
-)
+import "log"
 
 func NewRBTree() *RBTree {
 	return &RBTree{
@@ -107,7 +105,7 @@ func (rb *RBTree) Insert(val int) {
 		} else if val > cur.Value() {
 			cur = cur.Right
 		} else {
-			log.Info("duplicate val")
+			log.Print("duplicate val")
 			return
 		}
 	}
