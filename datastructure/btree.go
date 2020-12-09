@@ -1,6 +1,8 @@
 // btree
 package datastructure
 
+import "fmt"
+
 /*
 b树特性
 1. 每个节点有如下的特性
@@ -29,12 +31,24 @@ type bTree struct {
 	Root *bTreeNode
 }
 
-
+func (bt *bTreeNode) String() {
+	fmt.Println("key:-------------")
+	for i := 1; i <= bt.N; i++ {
+		fmt.Print(bt.Keys[i], " ")
+	}
+	fmt.Println("child-------")
+	for _, c := range bt.Childes {
+		if c == nil {
+			continue
+		}
+		c.String()
+	}
+}
 func newbTreeNode() *bTreeNode {
 	return &bTreeNode{
 		N:       0,
 		Keys:    make([]int, 2*t), // max = 2*t-1, index from 1
-		Leaf:    false,
+		Leaf:    true,
 		Childes: make([]*bTreeNode, 2*t), // max = 2*t, because range
 	}
 }
@@ -47,10 +61,13 @@ func (bt *bTree) Insert(k int) {
 		s := newbTreeNode()
 		bt.Root = s
 		s.N = 0
+		s.Leaf = false
 		s.Childes[0] = root
 		bTreeSplitChild(s, 0)
-
+		bTreeInsertNonFull(s, k)
+		return
 	}
+	bTreeInsertNonFull(root, k)
 }
 
 
@@ -60,7 +77,7 @@ func bTreeSearch(root *bTreeNode, k int) *bTreeNode {
 	}
 
 	index := 1
-	for ; index <= root.N && k < root.Keys[index]; index++ {
+	for ; index <= root.N && k > root.Keys[index]; index++ {
 	}
 
 	if index <= root.N && k == root.Keys[index] {
@@ -70,7 +87,7 @@ func bTreeSearch(root *bTreeNode, k int) *bTreeNode {
 		return nil
 	}
 
-	return bTreeSearch(root.Childes[index], k)
+	return bTreeSearch(root.Childes[index-1], k)
 }
 
 // todo create btree, insert data into tree.
@@ -100,10 +117,35 @@ func bTreeSplitChild(root *bTreeNode, idx int) {
 		root.Keys[j] = root.Keys[j-1]
 	}
 	root.Childes[idx+1] = node
-	if idx == 0 {
-		idx = 1
-	}
-	root.Keys[idx] = y.Keys[t]
+	root.Keys[idx+1] = y.Keys[t]
 	root.N++
 	// todo write disk
+}
+
+func bTreeInsertNonFull(root *bTreeNode, k int) {
+	i := root.N
+	if root.Leaf {
+		// child node
+		for i >= 1 && k < root.Keys[i] {
+			root.Keys[i+1] = root.Keys[i]
+			i--
+		}
+		root.Keys[i+1] = k
+		root.N++
+		// todo write disk
+		return
+	}
+	for i>=1 && k < root.Keys[i] {
+		i--
+	}
+
+	if root.Childes[i].N == 2*t-1 {
+		// full, split
+		bTreeSplitChild(root, i)
+		// Compare with the figures that have been raised
+		if k > root.Keys[i] {
+			i++
+		}
+	}
+	bTreeInsertNonFull(root.Childes[i], k)
 }
