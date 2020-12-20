@@ -1,6 +1,8 @@
 package datastructure
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestBtreeInsert(t *testing.T) {
 	tree := bTree{Root: newbTreeNode()}
