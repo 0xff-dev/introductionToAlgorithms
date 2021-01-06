@@ -66,3 +66,63 @@ func findPath(start, end byte, paths map[byte]byte) {
 	}
 	fmt.Printf("%c", r[0])
 }
+
+func initDijkstraSource(edges []edge, start byte) (map[byte]int, map[byte][]edge) {
+	r := make(map[byte]int)
+	relation := make(map[byte][]edge)
+	for _, e := range edges {
+		if _, ok := relation[e.s]; !ok {
+			relation[e.s] = make([]edge, 0)
+		}
+		r[e.s], r[e.e] = INF, INF
+		relation[e.s] = append(relation[e.s], e)
+	}
+	for _, e := range edges {
+		if e.s == start {
+			r[e.e] = e.w
+		}
+	}
+	r[start] = 0
+	return r, relation
+}
+
+func relationNodes(v map[byte]struct{}, relation map[byte][]edge) []edge {
+	r := make([]edge, 0)
+	for k := range v {
+		r = append(r, relation[k]...)
+	}
+	return r
+
+}
+
+// dijkstra
+func Dijkstra(edges []edge, start byte) map[byte]int {
+	resource, relation := initDijkstraSource(edges, start)
+	loopCount := len(resource)
+	visited := make(map[byte]struct{})
+	visited[start] = struct{}{}
+
+	for idx := 0; idx < loopCount-1; idx++ {
+		relationEdges := relationNodes(visited, relation)
+		minNode, minDist := byte(' '), INF
+		for _, e := range relationEdges {
+			if _, ok := visited[e.e]; !ok {
+				if resource[e.e] == INF || resource[e.e] < minDist {
+					minNode = e.e
+					minDist = resource[e.e]
+				}
+			}
+		}
+
+		visited[minNode] = struct{}{}
+		for _, e := range relation[minNode] {
+			if _, ok := visited[e.e]; !ok {
+				if resource[e.e] == INF || resource[e.e] > resource[e.s]+e.w {
+					resource[e.e] = resource[e.s] + e.w
+				}
+			}
+		}
+	}
+
+	return resource
+}

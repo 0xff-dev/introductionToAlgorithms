@@ -27,3 +27,26 @@ func TestBellmanFord(t *testing.T) {
 		t.Log("min distance is: ", res)
 	}
 }
+
+func initDijkstraGraph() []edge {
+	r := make([]edge, 0)
+	r = append(r, edge{'s', 't', 10})
+	r = append(r, edge{'s', 'y', 5})
+	r = append(r, edge{'t', 'x', 1})
+	r = append(r, edge{'t', 'y', 2})
+	r = append(r, edge{'y', 't', 3})
+	r = append(r, edge{'y', 'x', 9})
+	r = append(r, edge{'y', 'z', 2})
+	r = append(r, edge{'x', 'z', 4})
+	r = append(r, edge{'z', 'x', 6})
+	r = append(r, edge{'z', 's', 7})
+	return r
+}
+
+func TestDijkstra(t *testing.T) {
+	graph := initDijkstraGraph()
+	r := Dijkstra(graph, 's')
+	for aim, dist := range r {
+		t.Logf("start: s to: %s -- %d", string(aim), dist)
+	}
+}
