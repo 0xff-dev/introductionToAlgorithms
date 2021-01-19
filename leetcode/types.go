@@ -12,3 +12,15 @@ func (l *ListNode) Dis() {
 		log.Printf("val is [%d]", walker.Val)
 	}
 }
+
+type Node struct {
+	Val    int
+	Next   *Node
+	Random *Node
+}
+
+func (n *Node) Dis() {
+	for walker := n; walker != nil; walker = walker.Next {
+		log.Printf("val is [%d]", walker.Val)
+	}
+}
