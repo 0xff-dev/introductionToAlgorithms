@@ -24,3 +24,10 @@ func (n *Node) Dis() {
 		log.Printf("val is [%d]", walker.Val)
 	}
 }
+
+// tree node define
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
