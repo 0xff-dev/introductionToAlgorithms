@@ -54,3 +54,8 @@ func (t *TreeNode) Floor() {
 		fmt.Println()
 	}
 }
+
+type GraphNode struct {
+	Val       int
+	Neighbors []*GraphNode
+}
