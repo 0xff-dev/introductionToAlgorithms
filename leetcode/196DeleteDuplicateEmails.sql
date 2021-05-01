@@ -1,0 +1,1 @@
+delete p1 from Person p1 inner join (select min(id) id,Email from Person group by Email having count(*)>1) p2 where p1.Id>p2.id and p1.Email=p2.Email;
