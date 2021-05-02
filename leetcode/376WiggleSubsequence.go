@@ -29,3 +29,27 @@ func wiggleMaxLength(nums []int) int {
 	}
 	return r
 }
+
+func wiggleMaxLength1(nums []int) int {
+	length := len(nums)
+	if length == 0 {
+		return 0
+	}
+
+	a, b := 1, 1
+	// 0, 以当前元素结尾切上升的情况，1以当前元素结尾且下降
+	for idx := 1; idx < length; idx++ {
+		if nums[idx] > nums[idx-1] {
+			//上升的情况，依赖于前一个结尾是下降的
+			a = b + 1
+		}
+		if nums[idx] < nums[idx-1] {
+			b = a + 1
+		}
+
+	}
+	if a > b {
+		return a
+	}
+	return b
+}
