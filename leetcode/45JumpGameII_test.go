@@ -7,4 +7,9 @@ func TestJump(t *testing.T) {
 	if r := jump(nums); r != 2 {
 		t.Fatalf("expect 2 get %d", r)
 	}
+
+	nums = []int{2, 3, 0, 1, 4}
+	if r := jump(nums); r != 2 {
+		t.Fatalf("expect 2 get %d", r)
+	}
 }
