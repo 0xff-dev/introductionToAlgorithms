@@ -59,3 +59,8 @@ type GraphNode struct {
 	Val       int
 	Neighbors []*GraphNode
 }
+
+type MultiChildNode struct {
+	Val      int
+	Children []*MultiChildNode
+}
