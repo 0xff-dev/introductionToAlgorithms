@@ -29,3 +29,22 @@ func rob(nums []int) int {
 	}
 	return res
 }
+
+func rob2(nums []int) int {
+    length := len(nums)
+    if length == 0 {
+        return 0
+    }
+    _select, _noSelect := nums[0], 0
+    for idx := 1; idx < length; idx++ {
+        tmp := _noSelect
+        if _select > _noSelect {
+            _noSelect = _select
+        }
+        _select = tmp + nums[idx]
+    }
+    if _select > _noSelect {
+        return _select
+    }
+    return _noSelect
+}
