@@ -31,3 +31,28 @@ func insertionSortList(head *ListNode) *ListNode {
 
 	return head
 }
+
+func insertionSortList1(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	outPre, outWalker := head, head.Next
+	for outWalker != nil {
+		in, pre := head, head
+		for ; in != outWalker && in.Val < outWalker.Val; in = in.Next {
+			pre = in
+		}
+		if in == outWalker {
+			outWalker, outPre = outWalker.Next, outWalker
+			continue
+		}
+		outPre.Next, outWalker.Next = outWalker.Next, in
+		if in == head {
+			head = outWalker
+		} else {
+			pre.Next = outWalker
+		}
+		outWalker = outPre.Next
+	}
+	return head
+}
