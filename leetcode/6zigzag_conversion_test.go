@@ -21,5 +21,8 @@ func TestConvert(t *testing.T) {
 		if r := convert(a.Input, a.Row); r != a.Ans {
 			t.Fatalf("input[%s] expect to get[%s], result is[%s]", a.Input, a.Ans, r)
 		}
+		if r := convert2(a.Input, a.Row); r != a.Ans {
+			t.Fatalf("input[%s] expect to get[%s], result is[%s]", a.Input, a.Ans, r)
+		}
 	}
 }
