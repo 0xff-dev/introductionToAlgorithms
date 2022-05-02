@@ -33,3 +33,17 @@ func less(i, j int) bool {
 	}
 	return false
 }
+
+func anotherSolution(nums []int) []int {
+	s, e := 0, len(nums)-1
+	for s < e {
+		for ; s < e && nums[s]&1 == 0; s++ {
+		}
+		for ; s < e && nums[e]&1 == 1; e-- {
+		}
+		if s < e {
+			nums[s], nums[e] = nums[e], nums[s]
+		}
+	}
+	return nums
+}
