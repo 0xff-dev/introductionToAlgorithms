@@ -27,4 +27,7 @@ func TestDeepestLeavesSum(t *testing.T) {
 	if r := deepestLeavesSum(tree); r != 15 {
 		t.Fatalf("expect 15 get %d", r)
 	}
+	if r := solution2(tree); r != 15 {
+		t.Fatalf("expect 15 get %d ", r)
+	}
 }
