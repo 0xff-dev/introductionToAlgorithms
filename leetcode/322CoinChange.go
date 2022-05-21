@@ -1,28 +1,19 @@
 package leetcode
 
-const minCost = -1
-
-func specialMin(a, b int) int {
-	if a == minCost || a > b {
-		return b
-	}
-	return a
-}
+const compareMin = -1
 
 func coinChange(coins []int, amount int) int {
-	if amount == 0 {
-		return 0
-	}
-	r := make([]int, amount+1)
+	dp := make([]int, amount+1)
+	for cost := 1; cost <= amount; cost++ {
 
-	for i := 1; i <= amount; i++ {
-		now := minCost
-		for in := 0; in < len(coins); in++ {
-			if i-coins[in] >= 0 && r[i-coins[in]] != minCost {
-				now = specialMin(now, r[i-coins[in]]+1)
+		dp[cost] = compareMin
+		for _, coin := range coins {
+			if r := cost - coin; r >= 0 && dp[r] != compareMin {
+				if dp[cost] == compareMin || dp[r]+1 < dp[cost] {
+					dp[cost] = dp[r] + 1
+				}
 			}
 		}
-		r[i] = now
 	}
-	return r[amount]
+	return dp[amount]
 }
