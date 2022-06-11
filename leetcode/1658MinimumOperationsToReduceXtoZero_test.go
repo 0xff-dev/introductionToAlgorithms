@@ -7,9 +7,15 @@ func TestMinOperations(t *testing.T) {
 	if r := minOperations(nums, x); r != 2 {
 		t.Fatalf("expect 2 get %d", r)
 	}
+	if r := minOperations1(nums, x); r != 2 {
+		t.Fatalf("expect 2 get %d", r)
+	}
 
 	nums, x = []int{5, 6, 7, 8, 9}, 4
 	if r := minOperations(nums, x); r != -1 {
+		t.Fatalf("expect -1 get %d", r)
+	}
+	if r := minOperations1(nums, x); r != -1 {
 		t.Fatalf("expect -1 get %d", r)
 	}
 
@@ -17,9 +23,15 @@ func TestMinOperations(t *testing.T) {
 	if r := minOperations(nums, x); r != 5 {
 		t.Fatalf("expect 5 get %d", r)
 	}
+	if r := minOperations1(nums, x); r != 5 {
+		t.Fatalf("expect 5 get %d", r)
+	}
 
 	nums, x = []int{1, 1}, 3
 	if r := minOperations(nums, x); r != -1 {
+		t.Fatalf("expect -1 get %d", r)
+	}
+	if r := minOperations1(nums, x); r != -1 {
 		t.Fatalf("expect -1 get %d", r)
 	}
 
@@ -27,9 +39,15 @@ func TestMinOperations(t *testing.T) {
 	if r := minOperations(nums, x); r != 5 {
 		t.Fatalf("expect 5 get %d", r)
 	}
+	if r := minOperations1(nums, x); r != 5 {
+		t.Fatalf("expect 5 get %d", r)
+	}
 
 	nums, x = []int{5, 2, 3, 1, 1}, 5
 	if r := minOperations(nums, x); r != 1 {
+		t.Fatalf("expect 1 get %d", r)
+	}
+	if r := minOperations1(nums, x); r != 1 {
 		t.Fatalf("expect 1 get %d", r)
 	}
 }
