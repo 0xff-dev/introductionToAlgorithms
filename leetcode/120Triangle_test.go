@@ -13,11 +13,17 @@ func TestMinimumTotal(t *testing.T) {
 	if r != 11 {
 		t.Fatalf("expect 11 get %d", r)
 	}
+	if r := minimumTotal1(triangle); r != 11 {
+		t.Fatalf("expect 11 get %d", r)
+	}
 	triangle = [][]int{
 		{-10},
 	}
 	r = minimumTotal(triangle)
 	if r != -10 {
+		t.Fatalf("expect -10 get %d", r)
+	}
+	if r := minimumTotal1(triangle); r != -10 {
 		t.Fatalf("expect -10 get %d", r)
 	}
 }
