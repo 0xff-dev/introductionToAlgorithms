@@ -64,3 +64,38 @@ type MultiChildNode struct {
 	Val      int
 	Children []*MultiChildNode
 }
+
+/*
+Trie Node
+*/
+
+// TrieNOde support low letter
+type TrieNode struct {
+	// a- z 0- 25
+	Child [26]*TrieNode
+	Count uint8
+}
+
+// ab
+// abc
+func (tn *TrieNode) Insert(str string) {
+	root := tn
+	for _, bt := range []byte(str) {
+		if root.Child[bt-'a'] == nil {
+			root.Child[bt-'a'] = &TrieNode{Count: 0, Child: [26]*TrieNode{}}
+			root.Count++
+		}
+		root = root.Child[bt-'a']
+	}
+}
+
+func (tn *TrieNode) Search(pattern string) bool {
+	root := tn
+	for _, bt := range []byte(pattern) {
+		if root == nil || root.Child[bt-'a'] == nil {
+			return false
+		}
+		root = root.Child[bt-'a']
+	}
+	return true
+}
