@@ -27,3 +27,23 @@ func maxScore(cardPoints []int, k int) int {
 	}
 	return ans
 }
+
+func maxScore1(cardPoints []int, k int) int {
+	length := len(cardPoints)
+	r := 0
+	for idx := length-1; idx >= length-k; idx-- {
+		r += cardPoints[idx]
+	}
+	ans := r
+
+
+	l := 0
+	for idx := 0; idx < k; idx++ {
+		l += cardPoints[idx]
+		r -= cardPoints[length-k+idx]
+		if l+r > ans {
+			ans = l+r
+		}
+	}
+	return ans
+}
