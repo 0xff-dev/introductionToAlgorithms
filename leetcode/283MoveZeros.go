@@ -26,3 +26,17 @@ func moveZeroes(nums []int) {
 		zeroIdx++
 	}
 }
+
+func moveZeroes1(nums []int) {
+	// 1 0 2 0:
+	idx := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != 0 {
+			nums[idx] = nums[i]
+			idx++
+		}
+	}
+	for ; idx < len(nums); idx++ {
+		nums[idx] = 0
+	}
+}
