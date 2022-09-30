@@ -30,8 +30,8 @@
 4. go语言
 - go的并发模型
 - 协程与线程的区别/利用协程是否真的可以增加并发能力
-- golang的defer问题
-- golang的变量引用问题
+- golang的defer问题 done
+- golang的变量引用问题 done
 - golang map底层 done
 
 
