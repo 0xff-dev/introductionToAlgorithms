@@ -11,17 +11,21 @@ func lemonadeChange(bills []int) bool {
 		}
 
 		diff := cost - 5
-		for change[2] > 0 && diff >= 10 {
-			change[2]--
-			diff -= 10
+		need10 := diff / 10
+		if change[2] > 0 {
+			if change[2] >= need10 {
+				change[2] -= need10
+				diff -= need10 * 10
+			} else {
+				diff -= change[2] * 10
+				change[2] = 0
+			}
 		}
-		for change[1] > 0 && diff >= 5 {
-			change[1]--
-			diff -= 5
-		}
-		if diff > 0 {
+		need5 := diff / 5
+		if need5 != 0 && change[1] < need5 {
 			return false
 		}
+		change[1] -= need5
 		change[idx]++
 	}
 	return true
