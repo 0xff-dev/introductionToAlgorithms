@@ -31,15 +31,7 @@ func numberOfSubarrays(nums []int, k int) int {
 
 	start := 0
 	for ; start <= len(indies)-k; start++ {
-		end := start + k - 1
-		right := indies[end].right + 1
-		if right == 0 && k > 1 {
-			right++
-		}
-		if right == 0 {
-			ans += right
-		}
-		ans += indies[start].left * right
+		ans += indies[start].left * (indies[start+k-1].right+1)
 	}
 	return ans
 }

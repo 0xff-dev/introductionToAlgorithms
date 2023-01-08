@@ -26,4 +26,9 @@ func TestNumberOfSubarrays(t *testing.T) {
 	if r := numberOfSubarrays(nums, k); r != 24 {
 		t.Fatalf("expect 20 get %d", r)
 	}
+
+	nums, k = []int{2,1,1}, 1
+	if r := numberOfSubarrays(nums, k); r != 2 {
+		t.Fatalf("expect 2 get %d", r)
+	}
 }
