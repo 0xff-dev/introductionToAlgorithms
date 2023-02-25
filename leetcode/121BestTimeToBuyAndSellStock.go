@@ -17,3 +17,19 @@ func maxProfit(prices []int) int {
 	}
 	return res
 }
+
+func maxProfit2(prices []int) int {
+	ans := 0
+	min := prices[0]
+	for i := 1; i < len(prices); i++ {
+		if prices[i] < min {
+			min = prices[i]
+			continue
+		}
+		diff := prices[i] - min
+		if diff > ans {
+			ans = diff
+		}
+	}
+	return ans
+}
