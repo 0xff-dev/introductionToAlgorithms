@@ -99,3 +99,12 @@ func (tn *TrieNode) Search(pattern string) bool {
 	}
 	return true
 }
+
+type QuadNode struct {
+	Val         bool
+	IsLeaf      bool
+	TopLeft     *QuadNode
+	TopRight    *QuadNode
+	BottomLeft  *QuadNode
+	BottomRight *QuadNode
+}
