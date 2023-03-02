@@ -34,7 +34,10 @@ func TestCompress(t *testing.T) {
 			2,
 		},
 	} {
-		if r := compress(testCase.Input); r != testCase.Ans {
+		// if r := compress(testCase.Input); r != testCase.Ans {
+		// 	t.Fatalf("input[%s] ans[%d] result[%d]", testCase.Input, testCase.Ans, r)
+		// }
+		if r := myCompress(testCase.Input); r != testCase.Ans {
 			t.Fatalf("input[%s] ans[%d] result[%d]", testCase.Input, testCase.Ans, r)
 		}
 	}
