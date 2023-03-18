@@ -25,20 +25,18 @@ func (this *BrowserHistory) Back(steps int) string {
 	if this.length == 0 {
 		return ""
 	}
-	for this.index > 0 && steps > 0 {
-		this.index--
-		steps--
+	this.index -= steps
+	if this.index < 0 {
+		this.index = 0
 	}
 	return this.history[this.index]
 }
 
 func (this *BrowserHistory) Forward(steps int) string {
-	for this.index < this.length && steps > 0 {
-		this.index++
-		steps--
-	}
-	if this.index == this.length {
-		this.index--
+	//a,b,c
+	this.index += steps
+	if this.index >= this.length {
+		this.index = this.length - 1
 	}
 	return this.history[this.index]
 }
