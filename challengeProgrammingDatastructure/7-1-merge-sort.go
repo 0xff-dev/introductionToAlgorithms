@@ -1,5 +1,6 @@
 package challengeprogrammingdatastructure
 
+// 7-6
 func merge(nums []int, left, right int) int {
 	mid := (right-left)/2 + left
 	i, j := left, mid+1
