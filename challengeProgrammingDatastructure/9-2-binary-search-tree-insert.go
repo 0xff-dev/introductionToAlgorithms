@@ -22,6 +22,10 @@ func BinarySearchTreeInsert(root *BSTNode, val int) *BSTNode {
 }
 
 func inOrder92(root *BSTNode) {
+	if root == nil {
+		fmt.Println("nil node")
+		return
+	}
 	if root.Left != nil {
 		inOrder92(root.Left)
 	}
