@@ -5,11 +5,6 @@ import (
 	"strings"
 )
 
-type taskDesc struct {
-	name  string
-	times int
-}
-
 func CpuTasks(n, p int, tasks []taskDesc) string {
 	left := n
 	cost := 0

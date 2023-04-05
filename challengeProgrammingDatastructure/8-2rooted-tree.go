@@ -4,12 +4,6 @@ import (
 	"fmt"
 )
 
-type treeDefine struct {
-	id    int
-	k     int
-	child []int
-}
-
 func findRoot(tree []treeDefine) int {
 	nodes := make([]bool, len(tree))
 	for _, item := range tree {

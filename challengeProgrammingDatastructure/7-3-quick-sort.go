@@ -2,11 +2,6 @@ package challengeprogrammingdatastructure
 
 import "fmt"
 
-type card struct {
-	char       byte
-	num, index int
-}
-
 func (c card) String() string {
 	return fmt.Sprintf("%c %d:%d", c.char, c.num, c.index)
 }

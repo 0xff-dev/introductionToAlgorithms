@@ -5,11 +5,6 @@ import (
 	"sort"
 )
 
-type adjTable struct {
-	u, k   int
-	points []int
-}
-
 func GraphAdjMatrix(n int, table []adjTable) {
 	sort.Slice(table, func(i, j int) bool {
 		return table[i].u < table[j].u

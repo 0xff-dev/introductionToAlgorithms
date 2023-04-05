@@ -1,9 +1,5 @@
 package challengeprogrammingdatastructure
 
-type Matrix struct {
-	row, col int
-}
-
 func MatrixChainMulti(matrixs []Matrix) int {
 	if len(matrixs) < 2 {
 		return 0

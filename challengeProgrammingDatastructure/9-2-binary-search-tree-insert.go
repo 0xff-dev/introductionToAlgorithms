@@ -2,11 +2,6 @@ package challengeprogrammingdatastructure
 
 import "fmt"
 
-type BSTNode struct {
-	Val         int
-	Left, Right *BSTNode
-}
-
 func BinarySearchTreeInsert(root *BSTNode, val int) *BSTNode {
 	n := &BSTNode{Val: val}
 	if root == nil {

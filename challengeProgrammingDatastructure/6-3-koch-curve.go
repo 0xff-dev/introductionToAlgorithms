@@ -2,10 +2,6 @@ package challengeprogrammingdatastructure
 
 import "math"
 
-type point struct {
-	x, y float32
-}
-
 func KochCurve(startX, startY, endX, endY float32, n int) []point {
 	target := []point{{float32(startX), float32(startY)}}
 	if n == 0 {

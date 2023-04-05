@@ -2,10 +2,6 @@ package challengeprogrammingdatastructure
 
 import "fmt"
 
-type tree84 struct {
-	id, left, right int
-}
-
 func findFather84(tree []tree84) int {
 	nodes := make([]bool, len(tree))
 	for _, item := range tree {

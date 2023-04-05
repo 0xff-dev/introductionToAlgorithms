@@ -4,11 +4,6 @@ import (
 	"fmt"
 )
 
-type DLNode struct {
-	pre, next *DLNode
-	val       int
-}
-
 func (l *DLNode) Print(reverse bool) {
 	if l == nil {
 		fmt.Println("list is nil.")
