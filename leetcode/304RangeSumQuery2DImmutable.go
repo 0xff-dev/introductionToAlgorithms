@@ -1,5 +1,6 @@
 package leetcode
 
+/*
 type NumMatrix struct {
 	matrix [][]int
 }
@@ -23,6 +24,35 @@ func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
 		}
 	}
 	return ans
+}
+*/
+
+type NumMatrix struct {
+	m [][]int
+}
+
+func Constructor304(matrix [][]int) NumMatrix {
+	/*
+
+	  1 2
+	  3 4
+
+	*/
+	rows, cols := len(matrix), len(matrix[0])
+	m := make([][]int, rows+1)
+	for i := 0; i <= len(matrix); i++ {
+		m[i] = make([]int, cols+1)
+	}
+	for row := rows - 1; row >= 0; row-- {
+		for col := cols - 1; col >= 0; col-- {
+			m[row][col] = matrix[row][col] + m[row+1][col] + m[row][col+1] - m[row+1][col+1]
+		}
+	}
+	return NumMatrix{m: m}
+}
+
+func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
+	return this.m[row1][col1] - this.m[row2+1][col1] - this.m[row1][col2+1] + this.m[row2+1][col2+1]
 }
 
 /**
