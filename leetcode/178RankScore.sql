@@ -1,0 +1,1 @@
+select a2.score, a1.rr as 'rank' from (select s1.score, @rownum:=@rownum+1 rr from (select s.score from Scores as s group by s.score order by s.score desc) s1, (select @rownum:=0) r) a1, Scores a2 where a1.score=a2.score  order by a1.score desc;
