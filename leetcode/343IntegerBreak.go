@@ -26,3 +26,30 @@ func integerBreak(n int) int {
 	}
 	return dp[n]
 }
+
+func max343(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func integerBreak343(n int) int {
+	dp := make([]int, n+1)
+	dp[1] = 1
+	dp[2] = 1
+	for i := 3; i <= n; i++ {
+		end := i / 2
+		if i&1 == 1 {
+			end++
+		}
+		for start := i - 1; start >= end; start-- {
+			a := max343(start, dp[start])
+			b := max343(i-start, dp[i-start])
+			if a*b > dp[i] {
+				dp[i] = a * b
+			}
+		}
+	}
+	return dp[n]
+}
