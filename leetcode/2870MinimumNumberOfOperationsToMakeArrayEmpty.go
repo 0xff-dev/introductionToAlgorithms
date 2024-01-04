@@ -1,22 +1,9 @@
 package leetcode
 
 func minOperations2870(nums []int) int {
-	pos := make(map[int]int)
-	arr := make([]int, 0)
-	m := 1
-	index := 0
+	arr := make(map[int]int)
 	for _, n := range nums {
-		v, ok := pos[n]
-		if !ok {
-			pos[n] = index
-			arr = append(arr, 1)
-			index++
-			continue
-		}
-		arr[v]++
-		if arr[v] > m {
-			m = arr[v]
-		}
+		arr[n]++
 	}
 
 	ans := 0
