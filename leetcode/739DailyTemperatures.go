@@ -1,5 +1,6 @@
 package leetcode
 
+/*
 func dailyTemperatures(temperatures []int) []int {
 	ans := make([]int, len(temperatures))
 	// 用下表跳?
@@ -12,5 +13,24 @@ func dailyTemperatures(temperatures []int) []int {
 		}
 	}
 
+	return ans
+}
+*/
+
+func dailyTemperatures(temperatures []int) []int {
+	l := len(temperatures)
+	ans := make([]int, l)
+	stack := make([]int, l)
+	stack[l-1] = l - 1 //指向最后一个元素
+	cur := l - 1
+	for idx := l - 2; idx >= 0; idx-- {
+		for ; cur < l && temperatures[stack[cur]] <= temperatures[idx]; cur++ {
+		}
+		if cur != l {
+			ans[idx] = stack[cur] - idx
+		}
+		cur--
+		stack[cur] = idx
+	}
 	return ans
 }
