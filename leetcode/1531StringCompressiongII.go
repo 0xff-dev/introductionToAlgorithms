@@ -142,7 +142,7 @@ func getLengthOfOptimalCompression(s string, k int) int {
 }
 */
 
-func min(a, b int8) int8 {
+func min8(a, b int8) int8 {
 	if a <= b {
 		return a
 	}
@@ -178,7 +178,7 @@ func getLengthOfOptimalCompression(s string, k int) int {
 				} else {
 					compressedCharsLen = 4
 				}
-				dp[i+1][j] = min(dp[i+1][j], dp[l][j-differentCharsRemovedCount]+compressedCharsLen)
+				dp[i+1][j] = min8(dp[i+1][j], dp[l][j-differentCharsRemovedCount]+compressedCharsLen)
 			}
 		}
 	}
