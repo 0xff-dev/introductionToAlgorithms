@@ -1,34 +1,27 @@
 package leetcode
 
-func minHeightShelves(books [][]int, shelf_width int) int {
-	if len(books) == 0 {
-		return 0
-	}
-
+func minHeightShelves(books [][]int, shelfWidth int) int {
 	dp := make([]int, len(books))
 	dp[0] = books[0][1]
-
-	for idx := 1; idx < len(books); idx++ {
-		length, maxHeight := 0, 0
-		dp[idx] = 1000000
-		for j := idx; j >= 0; j-- {
-			length += books[j][0]
-			if books[j][1] > maxHeight {
-				maxHeight = books[j][1]
+	for i := 1; i < len(books); i++ {
+		dp[i] = books[i][1] + dp[i-1]
+		tmpMax := books[i][1]
+		curWidth := books[i][0]
+		for pre := i - 1; pre >= 0; pre-- {
+			curWidth += books[pre][0]
+			if curWidth > shelfWidth {
+				break
 			}
-			if length <= shelf_width {
-				if j == 0 {
-					if dp[idx] > maxHeight {
-						dp[idx] = maxHeight
-					}
-				} else {
-					if dp[idx] > dp[j-1]+maxHeight {
-						dp[idx] = dp[j-1] + maxHeight
-					}
-				}
-				continue
+			if books[pre][1] > tmpMax {
+				tmpMax = books[pre][1]
 			}
-			break
+			add := 0
+			if pre > 0 {
+				add = dp[pre-1]
+			}
+			if r := add + tmpMax; r < dp[i] {
+				dp[i] = r
+			}
 		}
 	}
 	return dp[len(books)-1]
