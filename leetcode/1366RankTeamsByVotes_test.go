@@ -1,0 +1,32 @@
+package leetcode
+
+import "testing"
+
+func TestRankTeams(t *testing.T) {
+	votes := []string{
+		"ABC", "ACB", "ABC", "ACB", "ACB",
+	}
+	exp := "ACB"
+	if r := rankTeams(votes); r != exp {
+		t.Fatalf("expect %s get %s", exp, r)
+	}
+	votes = []string{"WXYZ", "XYZW"}
+	exp = "XWYZ"
+	if r := rankTeams(votes); r != exp {
+		t.Fatalf("expect %s get %s", exp, r)
+	}
+	votes = []string{
+		"ZMNAGUEDSJYLBOPHRQICWFXTVK",
+	}
+	exp = "ZMNAGUEDSJYLBOPHRQICWFXTVK"
+	if r := rankTeams(votes); r != exp {
+		t.Fatalf("expect %s get %s", exp, r)
+	}
+	votes = []string{
+		"FVSHJIEMNGYPTQOURLWCZKAX", "AITFQORCEHPVJMXGKSLNZWUY", "OTERVXFZUMHNIYSCQAWGPKJL", "VMSERIJYLZNWCPQTOKFUHAXG", "VNHOZWKQCEFYPSGLAMXJIUTR", "ANPHQIJMXCWOSKTYGULFVERZ", "RFYUXJEWCKQOMGATHZVILNSP", "SCPYUMQJTVEXKRNLIOWGHAFZ", "VIKTSJCEYQGLOMPZWAHFXURN", "SVJICLXKHQZTFWNPYRGMEUAO", "JRCTHYKIGSXPOZLUQAVNEWFM", "NGMSWJITREHFZVQCUKXYAPOL", "WUXJOQKGNSYLHEZAFIPMRCVT", "PKYQIOLXFCRGHZNAMJVUTWES", "FERSGNMJVZXWAYLIKCPUQHTO", "HPLRIUQMTSGYJVAXWNOCZEKF", "JUVWPTEGCOFYSKXNRMHQALIZ", "MWPIAZCNSLEYRTHFKQXUOVGJ", "EZXLUNFVCMORSIWKTYHJAQPG", "HRQNLTKJFIEGMCSXAZPYOVUW", "LOHXVYGWRIJMCPSQENUAKTZF", "XKUTWPRGHOAQFLVYMJSNEIZC", "WTCRQMVKPHOSLGAXZUEFYNJI",
+	}
+	exp = "VWFHSJARNPEMOXLTUKICZGYQ"
+	if r := rankTeams(votes); r != exp {
+		t.Fatalf("expect %s get %s", exp, r)
+	}
+}
