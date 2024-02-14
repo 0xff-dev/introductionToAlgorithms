@@ -19,3 +19,18 @@ func numPairsDivisibleBy60(time []int) int {
 	}
 	return ans
 }
+
+func numPairsDivisibleBy602(time []int) int {
+	cache := [60]int{}
+	ans := 0
+	for _, dur := range time {
+		v := dur % 60
+		if v == 0 {
+			ans += cache[0]
+		} else {
+			ans += cache[60-v]
+		}
+		cache[v]++
+	}
+	return ans
+}
