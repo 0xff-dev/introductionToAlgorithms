@@ -33,10 +33,6 @@ func (e *eleCountList) Pop() interface{} {
 	return x
 }
 func findLeastNumOfUniqueInts(arr []int, k int) int {
-	// 4: 1
-	// 3:3
-	// 2:1
-	// 1:2
 	nodeCache := make(map[int]int)
 	list := eleCountList{}
 	for _, n := range arr {
@@ -62,4 +58,30 @@ func findLeastNumOfUniqueInts(arr []int, k int) int {
 		k -= top.c
 	}
 	return list.Len() + add
+}
+
+func findLeastNumOfUniqueInts1(arr []int, k int) int {
+	count := make(map[int]int)
+	for _, n := range arr {
+		count[n]++
+	}
+	cc := [100001]int{}
+	for _, c := range count {
+		cc[c]++
+	}
+	remove := 0
+	for i := 1; i <= 100000; i++ {
+		if cc[i] == 0 {
+			continue
+		}
+
+		a := k / i
+		if a < cc[i] {
+			remove += a
+			break
+		}
+		k -= cc[i] * i
+		remove += cc[i]
+	}
+	return len(count) - remove
 }
