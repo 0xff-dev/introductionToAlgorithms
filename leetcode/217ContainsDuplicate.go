@@ -13,3 +13,14 @@ func containsDuplicate(nums []int) bool {
 	}
 	return false
 }
+
+func containsDuplicate1(nums []int) bool {
+	c := make(map[int]struct{})
+	for _, n := range nums {
+		if _, ok := c[n]; ok {
+			return true
+		}
+		c[n] = struct{}{}
+	}
+	return false
+}
