@@ -40,7 +40,9 @@ func sumPrefixScores(words []string) []int {
 			ans[i] = v
 			continue
 		}
-		ans[i] = tree.score(w)
+		score := tree.score(w)
+		ans[i] = score
+		d[w] = score
 	}
 
 	return ans
