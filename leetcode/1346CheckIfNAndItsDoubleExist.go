@@ -2,6 +2,25 @@ package leetcode
 
 import "sort"
 
+func checkIfExist1346(arr []int) bool {
+	n := make(map[int]struct{})
+	zero := 0
+	for _, i := range arr {
+		n[i] = struct{}{}
+		if i == 0 {
+			zero++
+		}
+	}
+	for _, i := range arr {
+		if _, ok := n[2*i]; ok {
+			if i != 0 || zero > 1 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func checkIfExist(arr []int) bool {
 	sort.Ints(arr)
 	l := len(arr)
