@@ -1,7 +1,5 @@
 package leetcode
 
-import "sort"
-
 type SegmentTreeNode2762 struct {
 	Left, Right int
 	Min, Max    int
@@ -76,14 +74,24 @@ func continuousSubarrays(nums []int) int64 {
 	ans := int64(1)
 
 	tree := buildSegmentTree2762(nums, 0, l-1)
-	// 这个算法可以通过, 感觉这个东西可以通过滑动窗口进行优化，等我回来的, 我先去溜达
+	start := 0
+	var _max, _min int
 	for end := 1; end < l; end++ {
-		i := sort.Search(end, func(i int) bool {
-			_max := queryMax2762(tree, i, end)
-			_min := queryMin2762(tree, i, end)
-			return _max-_min <= 2
-		})
-		ans += int64(end-i) + 1
+		_max = queryMax2762(tree, start, end)
+		_min = queryMin2762(tree, start, end)
+		if _max-_min <= 2 {
+			ans += int64(end-start) + 1
+			continue
+		}
+		start++
+		for ; start <= end; start++ {
+			_max = queryMax2762(tree, start, end)
+			_min = queryMin2762(tree, start, end)
+			if _max-_min <= 2 {
+				break
+			}
+		}
+		ans += int64(end-start) + 1
 	}
 
 	return ans
