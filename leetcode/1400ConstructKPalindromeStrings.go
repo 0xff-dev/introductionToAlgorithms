@@ -9,15 +9,13 @@ func canConstruct1400(s string, k int) bool {
 		count[b-'a']++
 	}
 	odd, even := 0, 0
-	single := 0
-	for i, n := range count {
-		if n != 0 {
-			single++
-			if n&1 == 1 {
-				odd++
-				count[i]--
-			}
-			even += count[i]
+	for _, n := range count {
+		if n == 0 {
+			continue
+		}
+		even += n
+		if n&1 == 1 {
+			odd++
 		}
 	}
 	if odd > k {
@@ -26,5 +24,5 @@ func canConstruct1400(s string, k int) bool {
 	if k == odd {
 		return true
 	}
-	return k-odd <= even
+	return k <= even
 }
