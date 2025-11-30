@@ -1,35 +1,30 @@
 package leetcode
 
 func minSubarray(nums []int, p int) int {
-	n := len(nums)
-	sum := 0
-	for _, num := range nums {
-		sum = (sum + num) % p
+	nums[0] %= p
+	l := len(nums)
+	for i := range l {
+		nums[i] = (nums[i-1] + nums[i]) % p
 	}
-
-	target := sum % p
-	if target == 0 {
+	if nums[l-1] == 0 {
 		return 0
 	}
 
-	cache := make(map[int]int)
-	cache[0] = -1
-	tmpSum := 0
-	ans := n
+	// 6, 3, 5, 2.  9
+	// 6, 0, 5, 7
+	ret := -1
+	in := map[int]int{
+		0: -1,
+	}
+	for i := range l {
+		in[nums[i]] = i
 
-	for i := 0; i < n; i++ {
-		tmpSum = (tmpSum + nums[i]) % p
-		needed := (tmpSum - target + p) % p
-
-		if idx, found := cache[needed]; found {
-			ans = min(ans, i-idx)
+		diff := (nums[i] - nums[l-1] + p) % p
+		if index, ok := in[diff]; ok {
+			if (ret == -1 || ret > i-index) && i-index != l {
+				ret = i - index
+			}
 		}
-
-		cache[tmpSum] = i
 	}
-
-	if ans == n {
-		return -1
-	}
-	return ans
+	return ret
 }
