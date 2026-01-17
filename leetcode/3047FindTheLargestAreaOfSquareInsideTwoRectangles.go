@@ -20,7 +20,7 @@ func largestSquareArea(bottomLeft [][]int, topRight [][]int) int64 {
 
 			if interWidth > 0 && interHeight > 0 {
 				side := min(interWidth, interHeight)
-				side = max(side, maxSide)
+				maxSide = max(maxSide, side)
 			}
 		}
 	}
