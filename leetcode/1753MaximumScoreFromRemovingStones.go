@@ -1,0 +1,7 @@
+package leetcode
+
+func maximumScore1753(a int, b int, c int) int {
+	total := a + b + c
+	max_heap := max(a, b, c)
+	return min(total/2, total-max_heap)
+}
