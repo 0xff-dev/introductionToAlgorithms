@@ -11,13 +11,24 @@ func bitOfOne(n int) int {
 	return ans
 }
 func sortByBits(arr []int) []int {
-	sort.Slice(arr, func(i, j int) bool {
-		a := bitOfOne(arr[i])
-		b := bitOfOne(arr[j])
-		if a == b {
-			return arr[i] < arr[j]
+	size := len(arr)
+	ones := make([]int, size)
+	for i := range ones {
+		ones[i] = bitOfOne(arr[i])
+	}
+	indies := make([]int, size)
+	for i := range ones {
+		indies[i] = i
+	}
+	sort.Slice(indies, func(i, j int) bool {
+		ii, jj := indies[i], indies[j]
+		if ones[ii] == ones[jj] {
+			return arr[ii] < arr[jj]
 		}
-		return a < b
+		return ones[ii] < ones[jj]
 	})
-	return arr
+	for i := range indies {
+		ones[i] = arr[indies[i]]
+	}
+	return ones
 }
