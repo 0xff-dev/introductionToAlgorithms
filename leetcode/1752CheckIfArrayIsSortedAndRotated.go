@@ -1,26 +1,22 @@
 package leetcode
 
-
 func check(nums []int) bool {
-	length := len(nums)
-	if length == 0 {
-		return false
-	}
-	idx := 1
-	for ; idx < length; idx++ {
-		if nums[idx] < nums[idx-1] {
-			break
+	size := len(nums)
+	_break := false
+
+	for i := 1; i < size; i++ {
+		if nums[i] >= nums[i-1] {
+			continue
 		}
-	}
-	
-	for i := idx; i < length; i++ {
-		if idx == i && nums[i] > nums[0] {
+
+		if _break {
 			return false
 		}
-		if i != idx && !(nums[i] >= nums[i-1] && nums[i] <= nums[0]) {
-			return false
-		}
+		_break = true
 	}
 
-	return true
+	if !_break {
+		return true
+	}
+	return nums[size-1] <= nums[0]
 }
