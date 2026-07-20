@@ -4,7 +4,7 @@ import "fmt"
 
 // 并发素数实现
 func GenNums() chan int {
-	ch := make(chan int)
+	ch := make(chan int, 1)
 	go func() {
 		for i := 2; ; i++ {
 			ch <- i
@@ -14,7 +14,7 @@ func GenNums() chan int {
 }
 
 func Filter(in chan int, key int) chan int {
-	ch := make(chan int)
+	ch := make(chan int, 1)
 	go func() {
 		for item := range in {
 			if item%key != 0 {
